@@ -27,9 +27,6 @@ class Blog_network_class {
 
         global $wpdb;
 
-        // Debugging
-        error_reporting(E_ALL);
-
         // create tables
 
         $sql = "CREATE TABLE " . $this->stats_table . ' (
