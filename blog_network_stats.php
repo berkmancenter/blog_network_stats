@@ -30,8 +30,6 @@ class Blog_network_class {
         // Debugging
         error_reporting(E_ALL);
 
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
         // create tables
 
         $sql = "CREATE TABLE " . $this->stats_table . ' (
@@ -43,7 +41,9 @@ class Blog_network_class {
             UNIQUE KEY id (id),
             UNIQUE KEY blog_id (blog_id),
             FOREIGN KEY (blog_id) REFERENCES ' . $wpdb->base_prefix . 'blogs(blog_id) ON DELETE CASCADE
-            ) DEFAULT CHARSET=utf8';
+            );';
+    
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         dbDelta($sql);
 
