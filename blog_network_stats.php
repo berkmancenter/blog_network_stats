@@ -26,6 +26,10 @@ class Blog_network_class {
     public function install(){
 
         global $wpdb;
+
+        // Debugging
+        error_reporting(E_ALL);
+
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         // create tables
