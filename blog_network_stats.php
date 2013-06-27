@@ -107,6 +107,17 @@ class Blog_network_class {
 
     }
 
+    public function hook_in(){
+        add_submenu_page(
+            'settings.php',
+            __('Debug Blog Network Stats'),
+            __('Debug Blog Network Stats'),
+            'manage_network',
+            'debug-blog-network-stats',
+            array($this, 'install')
+        );
+    }
+
 }
 
 $blog_network_stats = new Blog_network_class();
@@ -115,7 +126,10 @@ $blog_network_stats = new Blog_network_class();
 add_action( 'blog_network_stats_update', array($blog_network_stats, 'update') );
 
 // Register Hooks
-register_activation_hook(__FILE__, array( $blog_network_stats, 'install' ));
+
+// register_activation_hook(__FILE__, array( $blog_network_stats, 'install' )); -- COMMENTED OUT FOR DEBUGGING
+
 register_deactivation_hook(__FILE__, array( $blog_network_stats, 'uninstall' ));
+add_action('network_admin_menu', array($blog_network_stats, 'hook_in')); // FOR DEBUGGING
 
 ?>
