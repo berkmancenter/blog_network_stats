@@ -30,7 +30,7 @@ class Blog_network_class {
         // create tables
 
         $sql = "CREATE TABLE " . $this->stats_table . ' (
-            id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            id bigint(20) NOT NULL AUTO_INCREMENT,
             blog_id bigint(20),
             total_users bigint(20),
             recent_posts_and_comments bigint(20),
