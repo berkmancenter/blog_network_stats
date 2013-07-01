@@ -2,12 +2,16 @@
 /*
 Plugin Name: Blog Network Stats
 Plugin URI: http://github.com/berkmancenter/blog_network_stats
-Description: A plugin that gathers stats about network blogs into one table.
+Description: A plugin that gathers stats about network blogs into one table and create widgets to showcase the stats.
 Author: Tomas Reimers
 Version: 0.1
 */
 
 global $wpdb;
+
+// create shortcodes
+require("includes/showcase/showcase.php");
+require("includes/directory/directory.php");
 
 // Need get_userdata()
 require_once(ABSPATH . 'wp-includes/pluggable.php');
