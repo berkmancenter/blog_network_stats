@@ -88,6 +88,8 @@ class Blog_network_class {
 
         foreach ($blogs as $blog){
 
+            set_time_limit(30);
+
             // ******************
             // ***** SQL TABLE **
             // ******************
