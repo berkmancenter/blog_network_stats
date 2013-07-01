@@ -80,7 +80,17 @@ class Blog_network_class {
             $wpdb->prepare("SELECT blog_id FROM " . $wpdb->base_prefix . "blogs", array())
         );
 
+        $json_file = fopen(plugin_dir_path(__FILE__) . "data.json", "w");
+
+        $first_item = true;
+
+        fwrite($json_file, '{"aaData": [');
+
         foreach ($blogs as $blog){
+
+            // ******************
+            // ***** SQL TABLE **
+            // ******************
 
             // update total users
 
@@ -106,7 +116,48 @@ class Blog_network_class {
                     )
                 );
 
+
+            // ******************
+            // ***** JSON *******
+            // ******************
+
+            if (!$first_item){
+                fwrite($json_file, ", ");
+            }
+            else {
+                $first_item = false;
+            }
+
+            $blogusers = get_users(array(
+                'blog_id' => $blog,
+                'role' => 'administrator'
+            ));
+
+            $blogusers_string = "";
+
+            foreach ($blogusers as $user) {
+                $blogusers_string .= "<div>" . $user->display_name . "</div>";
+            }
+
+            $row = array(
+                "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
+                "<div class='directory_description' title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
+                $blogusers_string,
+                date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
+                date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
+            );
+            
+            fwrite($json_file, json_encode($row));
+
+            unset($blogusers);
+            unset($blogusers_string);
+            unset($row);
+
         }
+
+        fwrite($json_file, ']}');
+
+        fclose($json_file);
 
     }
 
