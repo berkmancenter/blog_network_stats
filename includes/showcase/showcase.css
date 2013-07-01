@@ -1,0 +1,66 @@
+.showcase_item {
+    float: left;
+    width: 200px;
+    display: inline-block;
+    margin: 15px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    /* Complete width should be 230px, so that 4 can fit in the showcase */
+    background-color: #E6E6E6;
+}
+
+.showcase_box {
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 10px;
+    width:100%;
+}
+
+.showcase_title {
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+.showcase_description:before {
+    content: "\201C";
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    text-align: center;
+}
+
+.showcase_description {
+    padding-left: 40px;
+    position: relative;
+    color: #666;
+    min-height:40px;
+}
+
+.showcase_meta {
+    font-size: 10px;
+}
+
+.showcase_authors {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.showcase_links {
+    text-align: right;
+    margin-right: 15px;
+}
+
+.showcase_links a {
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.showcase_links a.current_showcase_section_link {
+    text-decoration: underline;
+}

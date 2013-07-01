@@ -1,0 +1,11 @@
+.dataTables_paginate .paginate_disabled_previous,
+.dataTables_paginate .paginate_disabled_next {
+    cursor: default;
+}
+
+.directory_description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 400px;
+}
