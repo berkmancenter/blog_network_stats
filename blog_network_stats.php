@@ -147,8 +147,10 @@ class Blog_network_class {
             fwrite($json_file, "2");
 
             $row = array(
+                /*
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
                 "<div class='directory_description' title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
+                */
                 $blogusers_string,
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
                 date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
