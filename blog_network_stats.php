@@ -158,8 +158,9 @@ class Blog_network_class {
 
             unset($blogusers);
             unset($blogusers_string);
-            unset($blogdetails);
             unset($row);
+
+            gc_collect_cycles();
 
         }
 
