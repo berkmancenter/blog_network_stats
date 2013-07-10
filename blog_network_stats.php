@@ -51,8 +51,7 @@ class Blog_network_class {
         $this->update();
 
         // Schedule cron
-        // wp_schedule_event(time(), 'daily', 'blog_network_stats_update');
-
+        wp_schedule_event(time(), 'daily', 'blog_network_stats_update');
 
     }
 
@@ -83,6 +82,8 @@ class Blog_network_class {
         $json_file = fopen(plugin_dir_path(__FILE__) . "data.json", "w");
 
         $first_item = true;
+
+        fwrite($json_file, json_encode(debug_backtrace()));
 
         fwrite($json_file, '{"aaData": [');
 
