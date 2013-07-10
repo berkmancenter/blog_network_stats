@@ -154,6 +154,7 @@ class Blog_network_class {
             */
 
             $row = array(
+                "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
                 $blogusers_string,
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
                 date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
