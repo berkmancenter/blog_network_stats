@@ -152,9 +152,8 @@ class Blog_network_class {
                 "<div class='directory_description' title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
                 $blogusers_string,
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
-                date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
                 */
-                $blogusers_string
+                date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
             );
 
             fwrite($json_file, "3");
