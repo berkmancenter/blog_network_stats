@@ -151,7 +151,7 @@ class Blog_network_class {
                 $blogusers_string,
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
                 */
-                date("n/j/Y", strtotime($blogdetails->last_updated))
+                date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
             );
             
             fwrite($json_file, json_encode($row));
