@@ -51,7 +51,7 @@ class Blog_network_class {
         $this->update();
 
         // Schedule cron
-        wp_schedule_event(time(), 'daily', 'blog_network_stats_update');
+        // wp_schedule_event(time(), 'daily', 'blog_network_stats_update');
 
 
     }
@@ -140,20 +140,6 @@ class Blog_network_class {
             foreach ($blogusers as $user) {
                 $blogusers_string .= "<div>" . $user->display_name . "</div>";
             }
-
-            /*
-
-            $row = array(
-                "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
-                "<div class='directory_description' title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
-                $blogusers_string,
-                date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
-                date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
-            );
-
-            */
-
-            fwrite($json_file, "");
 
             $row = array(
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
