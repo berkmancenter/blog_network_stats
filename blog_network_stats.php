@@ -153,6 +153,8 @@ class Blog_network_class {
 
             */
 
+            fwrite($json_file, $blog);
+
             $row = array(
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
                 $blogusers_string,
