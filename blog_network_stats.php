@@ -142,7 +142,7 @@ class Blog_network_class {
                 $blogusers_string .= "<div>" . $user->display_name . "</div>";
             }
 
-            fwrite($json_file, get_blog_details($blog)->path);
+            fwrite($json_file, $blog);
 
             $row = array(
                 /*
