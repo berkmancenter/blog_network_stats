@@ -146,6 +146,10 @@ class Blog_network_class {
 
             fwrite($json_file, "2");
 
+            $blogdetails = get_blog_details($blog);
+
+            fwrite($json_file, "3");
+
             $row = array(
                 /*
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
@@ -153,15 +157,16 @@ class Blog_network_class {
                 $blogusers_string,
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
                 */
-                date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
+                date("n/j/Y", strtotime($blogdetails->last_updated))
             );
 
-            fwrite($json_file, "3");
+            fwrite($json_file, "4");
             
             fwrite($json_file, json_encode($row));
 
             unset($blogusers);
             unset($blogusers_string);
+            unset($blogdetails);
             unset($row);
 
         }
