@@ -47,11 +47,11 @@ class Blog_network_class {
 
         dbDelta($sql);
 
-        // Populate table
-        $this->update();
-
         // Schedule cron
         wp_schedule_event(time(), 'daily', 'blog_network_stats_update');
+
+        // Populate table
+        do_action('blog_network_stats_update');
 
     }
 
