@@ -131,6 +131,8 @@ class Blog_network_class {
                 $first_item = false;
             }
 
+            fwrite($json_file, "1");
+
             $blogusers = get_users(array(
                 'blog_id' => $blog,
                 'role' => 'administrator'
@@ -142,6 +144,8 @@ class Blog_network_class {
                 $blogusers_string .= "<div>" . $user->display_name . "</div>";
             }
 
+            fwrite($json_file, "2");
+
             $row = array(
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
                 "<div class='directory_description' title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
@@ -149,6 +153,8 @@ class Blog_network_class {
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
                 date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
             );
+
+            fwrite($json_file, "3");
             
             fwrite($json_file, json_encode($row));
 
