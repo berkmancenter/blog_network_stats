@@ -170,8 +170,8 @@ class Blog_network_class {
 
         }
 
-        fwrite($json_file, json_encode(get_defined_vars(), JSON_PRETTY_PRINT));
-        
+        fwrite($json_file, json_encode(get_defined_vars()));
+
         // fwrite($json_file, ']}');
 
         fclose($json_file);
