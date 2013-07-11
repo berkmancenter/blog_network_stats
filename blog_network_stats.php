@@ -83,7 +83,7 @@ class Blog_network_class {
 
         $first_item = true;
 
-        fwrite($json_file, '{"aaData": [');
+        // fwrite($json_file, '{"aaData": [');
 
         foreach ($blogs as $blog){
 
@@ -117,13 +117,19 @@ class Blog_network_class {
                     )
                 );
 
+            // Clear memory
+            unset($users);
+            unset($total_users);
+            unset($posts);
+            unset($comments);
+            unset($recent_posts_and_comments);
 
             // ******************
             // ***** JSON *******
             // ******************
 
             if (!$first_item){
-                fwrite($json_file, ", ");
+                // fwrite($json_file, ", ");
             }
             else {
                 $first_item = false;
@@ -140,7 +146,7 @@ class Blog_network_class {
                 $blogusers_string .= "<div>" . $user->display_name . "</div>";
             }
 
-            fwrite($json_file, memory_get_usage());
+            // fwrite($json_file, memory_get_usage());
 
             $row = array(
                 /*
@@ -152,9 +158,14 @@ class Blog_network_class {
                 date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
             );
             
-            fwrite($json_file, json_encode($row));
+            // fwrite($json_file, json_encode($row));
 
-            fwrite($json_file, "\n");
+            if ($blog > 20){
+                fwrite($json_file, json_encode(get_defined_vars(), JSON_PRETTY_PRINT));
+                break;
+            }
+
+            // fwrite($json_file, "\n");
 
             unset($blogusers);
             unset($blogusers_string);
