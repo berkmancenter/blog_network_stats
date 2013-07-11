@@ -160,7 +160,7 @@ class Blog_network_class {
             
             // fwrite($json_file, json_encode($row));
 
-            if ($blog > 20){
+            if ($blog > 500){
                 fwrite($json_file, json_encode(get_defined_vars(), JSON_PRETTY_PRINT));
                 break;
             }
