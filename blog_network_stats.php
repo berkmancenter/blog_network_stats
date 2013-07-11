@@ -83,8 +83,6 @@ class Blog_network_class {
 
         $first_item = true;
 
-        fwrite($json_file, json_encode(debug_backtrace()));
-
         fwrite($json_file, '{"aaData": [');
 
         foreach ($blogs as $blog){
@@ -155,6 +153,8 @@ class Blog_network_class {
             );
             
             fwrite($json_file, json_encode($row));
+
+            fwrite($json_file, "\n");
 
             unset($blogusers);
             unset($blogusers_string);
