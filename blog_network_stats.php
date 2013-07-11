@@ -79,7 +79,7 @@ class Blog_network_class {
             $wpdb->prepare("SELECT blog_id FROM " . $wpdb->base_prefix . "blogs", array())
         );
 
-        $json_file = fopen(plugin_dir_path(__FILE__) . "data.json", "w");
+        $json_file = fopen(plugin_dir_path(__FILE__) . "new_data.json", "w");
 
         $first_item = true;
 
@@ -149,18 +149,14 @@ class Blog_network_class {
             fwrite($json_file, memory_get_usage());
 
             $row = array(
-                /*
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
                 "<div class='directory_description' title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
                 $blogusers_string,
-                */
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
                 date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
             );
             
             fwrite($json_file, json_encode($row));
-
-            fwrite($json_file, "\n");
 
             unset($blogusers);
             unset($blogusers_string);
@@ -176,18 +172,8 @@ class Blog_network_class {
 
         fclose($json_file);
 
-    }
+        rename("new_data.json", "data.json");
 
-    // FOR DEBUGGING
-    public function hook_in(){
-        add_submenu_page(
-            'settings.php',
-            __('Debug Blog Network Stats'),
-            __('Debug Blog Network Stats'),
-            'manage_network',
-            'debug-blog-network-stats',
-            array($this, 'install')
-        );
     }
 
 }
@@ -199,10 +185,7 @@ add_action( 'blog_network_stats_update', array($blog_network_stats, 'update') );
 
 // Register Hooks
 
-// register_activation_hook(__FILE__, array( $blog_network_stats, 'install' ));
+register_activation_hook(__FILE__, array( $blog_network_stats, 'install' ));
 register_deactivation_hook(__FILE__, array( $blog_network_stats, 'uninstall' ));
-
-add_action('network_admin_menu', array($blog_network_stats, 'hook_in')); // FOR DEBUGGING
-
 
 ?>
