@@ -170,7 +170,7 @@ class Blog_network_class {
 
         fclose($json_file);
 
-        rename("new_data.json", "data.json");
+        rename(plugin_dir_path(__FILE__) . "new_data.json", plugin_dir_path(__FILE__) . "data.json");
 
     }
 
