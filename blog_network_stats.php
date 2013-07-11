@@ -165,6 +165,8 @@ class Blog_network_class {
                 fwrite($json_file, "\n");
                 fwrite($json_file, json_encode(get_defined_vars()));
                 fwrite($json_file, "\n");
+                fwrite($json_file, json_encode(get_defined_functions()));
+                fwrite($json_file, "\n");
             }
 
             // fwrite($json_file, "\n");
