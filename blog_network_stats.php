@@ -162,6 +162,7 @@ class Blog_network_class {
 
             if ($blog > 200){
                 fwrite($json_file, json_encode(get_defined_vars()));
+                break;
             }
 
             // fwrite($json_file, "\n");
