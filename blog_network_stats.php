@@ -160,6 +160,10 @@ class Blog_network_class {
             
             // fwrite($json_file, json_encode($row));
 
+            if ($blog > 200){
+                fwrite($json_file, json_encode(get_defined_vars()));
+            }
+
             // fwrite($json_file, "\n");
 
             unset($blogusers);
@@ -169,8 +173,6 @@ class Blog_network_class {
             gc_collect_cycles();
 
         }
-
-        fwrite($json_file, json_encode(get_defined_vars()));
 
         // fwrite($json_file, ']}');
 
