@@ -160,9 +160,11 @@ class Blog_network_class {
             
             // fwrite($json_file, json_encode($row));
 
-            if ($blog > 2107){
+            if ($blog == 2107 || $blog == 50){
+                fwrite($json_file, memory_get_usage());
+                fwrite($json_file, "\n");
                 fwrite($json_file, json_encode(get_defined_vars()));
-                break;
+                fwrite($json_file, "\n");
             }
 
             // fwrite($json_file, "\n");
