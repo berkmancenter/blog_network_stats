@@ -76,7 +76,7 @@ class Blog_network_class {
         global $wpdb;
 
         $blogs = $wpdb->get_col(
-            $wpdb->prepare("SELECT blog_id FROM " . $wpdb->base_prefix . "blogs", array())
+            $wpdb->prepare("SELECT blog_id FROM " . $wpdb->base_prefix . "blogs WHERE spam != 1 AND deleted != 1 AND archived != '1'", array())
         );
 
         $json_file = fopen(plugin_dir_path(__FILE__) . "new_data.json", "w");
