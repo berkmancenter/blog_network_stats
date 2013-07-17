@@ -3,9 +3,13 @@
     cursor: default;
 }
 
-.directory_description {
+.directory_column_wrap {
+    word-wrap: break-word;
+}
+
+.directory_column_cutoff {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 400px;
+
 }

@@ -4,9 +4,15 @@ jQuery(document).ready(function() {
         "sAjaxSource": ajax_object.ajax_url + "?action=populate_directory",
         "sDom": "<'clear'f><lprtip>",
         "aoColumns": [
-            null,
-            null,
-            null,
+            { "sWidth": "170px" },
+            {
+                "sWidth": "170px",
+                "sClass": "directory_column_cutoff"
+            },
+            {
+                "sWidth": "300px",
+                "sClass": "directory_column_wrap"
+            },
             null,
             { "sType": "date" },
             { "sType": "date" },
