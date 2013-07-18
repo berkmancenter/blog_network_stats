@@ -3,6 +3,7 @@ jQuery(document).ready(function() {
         "bProcessing": true,
         "sAjaxSource": ajax_object.ajax_url + "?action=populate_directory",
         "sDom": "<'clear'f><lprtip>",
+        "bAutoWidth" : false, 
         "aoColumns": [
             { "sWidth": "170px" },
             {
