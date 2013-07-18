@@ -13,9 +13,14 @@ jQuery(document).ready(function() {
                 "sWidth": "300px",
                 "sClass": "directory_column_wrap"
             },
-            null,
-            { "sType": "date" },
-            { "sType": "date" },
+            { 
+                "sWidth": "140px",
+                "sType": "date"
+            },
+            {
+                "sWidth": "140px",
+                "sType": "date"
+            }
         ]
     });
 });

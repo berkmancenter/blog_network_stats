@@ -135,30 +135,16 @@ class Blog_network_class {
                 $first_item = false;
             }
 
-            $blogusers = get_users(array(
-                'blog_id' => $blog,
-                'role' => 'administrator'
-            ));
-
-            $blogusers_string = "";
-
-            foreach ($blogusers as $user) {
-                $blogusers_string .= "<div>" . $user->display_name . "</div>";
-            }
-
             $row = array(
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
                 "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_details($blog)->path . "</a>",
                 "<div title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
-                $blogusers_string,
                 date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
                 date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
             );
             
             fwrite($json_file, json_encode($row));
 
-            unset($blogusers);
-            unset($blogusers_string);
             unset($row);
 
             wp_cache_flush();

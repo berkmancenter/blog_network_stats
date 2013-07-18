@@ -73,7 +73,6 @@ function network_directory_handler( $atts ) {
                 $dataTable .= "<th>Blog</th>";
                 $dataTable .= "<th>Path</th>";
                 $dataTable .= "<th>Description</th>";
-                $dataTable .= "<th>Owner</th>";
                 $dataTable .= "<th>Created</th>";
                 $dataTable .= "<th>Updated</th>";
             $dataTable .= "</tr>";
