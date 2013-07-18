@@ -13,3 +13,7 @@
     text-overflow: ellipsis;
 
 }
+
+.datatable {
+    table-layout:fixed;
+}
