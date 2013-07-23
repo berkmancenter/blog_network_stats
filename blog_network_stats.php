@@ -89,67 +89,71 @@ class Blog_network_class {
 
             set_time_limit(30);
 
-            // ******************
-            // ***** SQL TABLE **
-            // ******************
+            if (get_blog_option($blog, 'blog_public') == "1"){
 
-            // update total users
+                // ******************
+                // ***** SQL TABLE **
+                // ******************
 
-            $users = get_users(array(
-                    'blog_id' => $blog
-                ));
+                // update total users
 
-            $total_users = count($users);
+                $users = get_users(array(
+                        'blog_id' => $blog
+                    ));
 
-            // update posts and comments
+                $total_users = count($users);
 
-            $posts = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->get_blog_prefix($blog) . 'posts WHERE post_status = "publish" AND post_type = "post"');
-            $comments = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->get_blog_prefix($blog) . 'comments WHERE comment_approved="1"');
+                // update posts and comments
 
-            $recent_posts_and_comments = $posts + $comments;
+                $posts = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->get_blog_prefix($blog) . 'posts WHERE post_status = "publish" AND post_type = "post"');
+                $comments = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->get_blog_prefix($blog) . 'comments WHERE comment_approved="1"');
 
-            // put in sql
+                $recent_posts_and_comments = $posts + $comments;
 
-            $wpdb->query(
-                    $wpdb->prepare(
-                        "INSERT INTO " . $this->stats_table . " (blog_id, total_users, recent_posts_and_comments) VALUES (%d, %d, %d) ON DUPLICATE KEY UPDATE total_users = %d, recent_posts_and_comments = %d",
-                        array($blog, $total_users, $recent_posts_and_comments, $total_users, $recent_posts_and_comments)
-                    )
+                // put in sql
+
+                $wpdb->query(
+                        $wpdb->prepare(
+                            "INSERT INTO " . $this->stats_table . " (blog_id, total_users, recent_posts_and_comments) VALUES (%d, %d, %d) ON DUPLICATE KEY UPDATE total_users = %d, recent_posts_and_comments = %d",
+                            array($blog, $total_users, $recent_posts_and_comments, $total_users, $recent_posts_and_comments)
+                        )
+                    );
+
+                // Clear memory
+                unset($users);
+                unset($total_users);
+                unset($posts);
+                unset($comments);
+                unset($recent_posts_and_comments);
+
+                // ******************
+                // ***** JSON *******
+                // ******************
+
+                if (!$first_item){
+                    fwrite($json_file, ", ");
+                }
+                else {
+                    $first_item = false;
+                }
+
+                $row = array(
+                    "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
+                    "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_details($blog)->path . "</a>",
+                    "<div title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
+                    date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
+                    date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
                 );
+                
+                fwrite($json_file, json_encode($row));
 
-            // Clear memory
-            unset($users);
-            unset($total_users);
-            unset($posts);
-            unset($comments);
-            unset($recent_posts_and_comments);
+                unset($row);
 
-            // ******************
-            // ***** JSON *******
-            // ******************
+                wp_cache_flush();
 
-            if (!$first_item){
-                fwrite($json_file, ", ");
+                gc_collect_cycles();
+
             }
-            else {
-                $first_item = false;
-            }
-
-            $row = array(
-                "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_option($blog, "blogname") . "</a>",
-                "<a href='" . get_blog_details($blog)->path . "'>" . get_blog_details($blog)->path . "</a>",
-                "<div title='" . get_blog_option($blog, "blogdescription") . "'>" . get_blog_option($blog, "blogdescription") . "</div>",
-                date("n/j/Y", strtotime(get_blog_details($blog)->registered)),
-                date("n/j/Y", strtotime(get_blog_details($blog)->last_updated))
-            );
-            
-            fwrite($json_file, json_encode($row));
-
-            unset($row);
-
-            wp_cache_flush();
-
-            gc_collect_cycles();
 
         }
 
